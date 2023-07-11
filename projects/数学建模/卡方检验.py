@@ -4,7 +4,6 @@ from scipy.stats import chi2_contingency
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 设置字体为中文显示
 
 # 从Excel文件读取数据
@@ -30,7 +29,6 @@ perform_chi2_test(glass_type, surface_wind)
 perform_chi2_test(pattern, surface_wind)
 perform_chi2_test(color, surface_wind)
 
-
 # 可视化卡方检验结果
 def visualize_chi2_test(variable1, variable2):
     observed = pd.crosstab(variable1, variable2)
@@ -39,7 +37,7 @@ def visualize_chi2_test(variable1, variable2):
     # 创建柱状图
     plt.figure(figsize=(8, 6))
     sns.countplot(x=variable1, hue=variable2)
-    plt.title("Variable Relationship: {} vs {}".format(variable1.name, variable2.name))
+    plt.title("变量关系: {} vs {}，P值: {:.5f}".format(variable1.name, variable2.name, p_val))
     plt.xlabel(variable1.name)
     plt.ylabel("Count")
     plt.legend(title=variable2.name)
@@ -48,7 +46,7 @@ def visualize_chi2_test(variable1, variable2):
     # 创建热力图
     plt.figure(figsize=(8, 6))
     sns.heatmap(observed, annot=True, cmap="YlGnBu")
-    plt.title("Variable Relationship: {} vs {}".format(variable1.name, variable2.name))
+    plt.title("变量关系: {} vs {}，P值: {:.5f}".format(variable1.name, variable2.name, p_val))
     plt.xlabel(variable2.name)
     plt.ylabel(variable1.name)
     plt.show()
